@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  justify-content: center;
+  min-width: 100%;
+}
+.checkbox-container {
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+.todo-label {
+  margin-right: 30px;
+  min-width: 75%;
+  display: inline-flex;
+}
+
+.todo-container {
+
+  margin-top: 30px;
+
+}
+
+.todo-row-container { 
+
+  margin-bottom: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+
+}
+
+.todo-row-container:hover {
+  background-color: rgb(202, 242, 250);
+}
+
+.form-label {
+  padding: 10px;
+  border-radius: 5px;
+  margin-right: 20px;
+
+}
+
+.form-label:hover {
+  border-radius: 0px;
+  background-color: aliceblue;
+}
