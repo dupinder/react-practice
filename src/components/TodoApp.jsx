@@ -1,6 +1,7 @@
 import React from "react";
 
 import { useState } from 'react';
+import { BrowserRouter } from "react-router-dom";
 
 export default function TodoApp() {
 
@@ -23,12 +24,12 @@ export default function TodoApp() {
     };
   
     const toggleTodo = (id, e) => {
-      todoList.map( t => {
-        if(t.id == id){
+      todoList.map((t) => {
+        if (t.id == id) {
           t.completed = !t.completed;
-          console.log("tid"+t.id+" is checked : " + t.completed)
+          console.log("tid" + t.id + " is checked : " + t.completed);
         }
-      })
+      });
     }
   
     const deleteMe = id => {
@@ -67,7 +68,7 @@ export default function TodoApp() {
                 
                 </div>
             </div>
-            </div>   
+            </div>  
         </>
     );
 }

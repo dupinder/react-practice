@@ -1,10 +1,16 @@
-
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
 import Navbar from './components/Navbar';
 import TodoApp from './components/TodoApp';
 import TextUtil from './components/TextUtil';
+
+import {
+  createBrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 import './App.css'
 
@@ -18,10 +24,16 @@ export default function App() {
   return (
     <>
       <Navbar appName={navBar.appName} navItems={navBar.navItems} />
-      <TodoApp></TodoApp>
-      <TextUtil></TextUtil>
+
+      <Routes> 
+          <Route path="/" element={<TodoApp></TodoApp>} />
+          <Route path="/text-utils" element={<TextUtil></TextUtil>} />
+          <Route path="/contact" element={<h1>Contact</h1>}/>
+          <Route path="/home" element={<h1>Home</h1>}/>
+      </Routes>
+      
     </>
-  )
+  );
 }
 
 

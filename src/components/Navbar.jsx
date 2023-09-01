@@ -1,12 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <a className="navbar-brand" href="/">
+        <Link className="navbar-brand" to="/">
           {props.appName}
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -24,13 +25,9 @@ export default function Navbar(props) {
               return (
                 <>
                   <li className="nav-item">
-                    <a
-                      className="nav-link active"
-                      aria-current="page"
-                      href={item.url}
-                    >
+                    <Link className="nav-link active" aria-current="page" to={item.url}>
                       {item.name}
-                    </a>
+                    </Link>
                   </li>
                 </>
               );
