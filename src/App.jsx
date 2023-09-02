@@ -5,6 +5,7 @@ import 'bootstrap/dist/js/bootstrap.js';
 import Navbar from './components/Navbar';
 import TodoApp from './components/TodoApp';
 import TextUtil from './components/TextUtil';
+import News from './components/class-based-components/News';
 
 import {
   createBrowserRouter,
@@ -18,7 +19,7 @@ export default function App() {
 
   const navBar = {
     appName: "Todo Practice",
-    navItems: [{  "name": "Home",  "url": "/home"}, {  "name": "Text Utils",  "url": "/text-utils"}, {  "name": "Contact",  "url": "/contact"}]
+    navItems: [{  "name": "Home",  "url": "/home"}, {  "name": "Text Utils",  "url": "/text-utils"}, {  "name": "Contact",  "url": "/contact"}, {"name": "News", "url": "/news"}]
   }
 
   return (
@@ -30,8 +31,9 @@ export default function App() {
           <Route path="/text-utils" element={<TextUtil></TextUtil>} />
           <Route path="/contact" element={<h1>Contact</h1>}/>
           <Route path="/home" element={<h1>Home</h1>}/>
+          <Route path="/news" element={<News></News>}/>
       </Routes>
-      
+
     </>
   );
 }
