@@ -8,7 +8,7 @@ export default function Navbar(props) {
         <Link className="navbar-brand" to="/">
           {props.appName}
         </Link>
-        <button
+        <button id="navBarButton"
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
@@ -20,11 +20,11 @@ export default function Navbar(props) {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav" id="navbar-ul">
             {props.navItems.map((item, index) => {
               return (
                 <>
-                  <li className="nav-item">
+                  <li className="nav-item" id={index}>
                     <Link className="nav-link active" aria-current="page" to={item.url}>
                       {item.name}
                     </Link>

@@ -1,8 +1,9 @@
-import React, {Component} from "react";
+import React, { useEffect, useState } from "react";
 
-export default class News extends Component {
-    dummmyImageUrl = "https://i.pinimg.com/originals/3d/65/65/3d65659a932d453df0268d4ff451335c.gif";
-     dummyArticles = {
+export default function News(props) {
+
+    const dummmyImageUrl = "https://i.pinimg.com/originals/3d/65/65/3d65659a932d453df0268d4ff451335c.gif";
+     const dummyArticles = {
         "status": "success",
         "totalResults": 7,
         "results": [
@@ -196,62 +197,88 @@ export default class News extends Component {
         ],
         "nextPage": null
     };
+    const changeValue = true;
 
-    constructor() {
-        super();
-        this.state = {
-            articles: []
-        }
+    const [articles, setArticles] = useState([]);
+    const [nextPage, setNextPage] = useState(1);
+
+    
+    async function fetchNews(pageNumber) {
+        console.log("fetch function called")
+        pageNumber = pageNumber ? '&page='+pageNumber : "";
+        return await fetch("https://newsdata.io/api/1/news?apikey=pub_2870333d5705cd958da96218b080b8f77940d&language=en"+pageNumber);
     }
 
-    fetchNews = async () => {
+    async function moveToNextPage() {
         
+        if(nextPage == 1)
+        return;
 
-        //this.setState({articles: result.results})    
+        const result  = await fetchNews(nextPage);
+        const data = await result.json()
+        setArticles(data.results);
+        setNextPage(data.nextPage);
     }
 
-    async componentDidMount() {
-        const result =  this.dummyArticles;//await fetch("https://newsdata.io/api/1/news?apikey=pub_2870333d5705cd958da96218b080b8f77940d&q=pegasus&language=en")
-        //const data = await result.json()
-    console.log(result.results)
+    useEffect(() => {
+        // fetch news and set in article
+        fetchNews()
+        .then((result) => {
+            return result.json()
+        }).then((data) => {
+            setArticles(data.results);
+            setNextPage(data.nextPage);
+        });
 
-        this.setState({articles: result.results})
-    }
 
-    render() {
-        return (
-          <>
+    }, [])
+
+
+    return (
+        <>
             <div className="container">
-              <div className="row">
+                <div className="row">
                 <div className="col-12">
-                  <h1>News from class based components</h1>
+                    <h1>News from class based components</h1>
                 </div>
-              </div>
+                </div>
             </div>
             <div className="container my-5">
-              <div className="row">
-                {this.state.articles.map((value) => {
-                  return (
-                    <div className="col-4">
-                      <div className="card" style={{ width: "18rem" }}>
+                <div className="row" id="newsContainer">
+                {articles.map((value,index) => {
+                    return (
+                    <div className="col-4" id={index}>
+                        <div className="card" style={{ width: "18rem" }}>
                         <img
-                          src={value.image_url ? value.image_url: this.dummmyImageUrl}
-                          className="card-img-top"
-                          alt="..."
+                            src={
+                            value.image_url
+                                ? value.image_url
+                                : dummmyImageUrl
+                            }
+                            className="card-img-top"
+                            alt="..."
                         />
                         <div className="card-body">
-                          <p className="card-text">{value.title}</p>
-                          <a href={value.link} className="btn btn-primary">
+                            <p className="card-text">{value.title}</p>
+                            <a href={value.link} className="btn btn-primary">
                             Go somewhere
-                          </a>
+                            </a>
                         </div>
-                      </div>
+                        </div>
                     </div>
-                  );
+                    );
                 })}
-              </div>
+                </div>
             </div>
-          </>
-        );
-    }
+
+            <div className="container">
+                <div className="row">
+                <div className="col-12">
+                    <button className="btn btn-primary" onClick={moveToNextPage}>Next</button>
+                </div>
+                </div>
+            </div>
+        </>
+    );
+    
 }

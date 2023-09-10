@@ -5,7 +5,7 @@ import 'bootstrap/dist/js/bootstrap.js';
 import Navbar from './components/Navbar';
 import TodoApp from './components/TodoApp';
 import TextUtil from './components/TextUtil';
-import News from './components/class-based-components/News';
+import News from './components/refac-to-fun-based-components/News';
 
 import {
   createBrowserRouter,
