@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar(props) {
+  const location = useLocation();
   return (
+    
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
@@ -25,7 +27,7 @@ export default function Navbar(props) {
               return (
                 <>
                   <li className="nav-item" id={index}>
-                    <Link className="nav-link active" aria-current="page" to={item.url}>
+                    <Link className={`nav-link ${location.pathname === item.url ? "activeLink" : "" }`} aria-current="page" to={item.url}>
                       {item.name}
                     </Link>
                   </li>

@@ -1,0 +1,9 @@
+.activeLink {
+    color: blue;
+    font-weight: 700;
+}
+
+.activeLink:hover {
+    color: rgb(43, 43, 80);
+    font-weight: 900;
+}
