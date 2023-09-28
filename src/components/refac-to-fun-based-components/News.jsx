@@ -202,35 +202,24 @@ export default function News(props) {
     const [articles, setArticles] = useState([]);
     const [nextPage, setNextPage] = useState(1);
 
+
     
     async function fetchNews(pageNumber) {
-        console.log("fetch function called")
+        console.log("fetch function called with page number "+ pageNumber)
         pageNumber = pageNumber ? '&page='+pageNumber : "";
-        return await fetch("https://newsdata.io/api/1/news?apikey=pub_2870333d5705cd958da96218b080b8f77940d&language=en"+pageNumber);
-    }
-
-    async function moveToNextPage() {
-        
-        if(nextPage == 1)
-        return;
-
-        const result  = await fetchNews(nextPage);
+        const result  = await fetch("https://newsdata.io/api/1/news?apikey=pub_2870333d5705cd958da96218b080b8f77940d&language=en"+pageNumber);
         const data = await result.json()
         setArticles(data.results);
         setNextPage(data.nextPage);
     }
 
+    async function moveToNextPage() {
+        if(nextPage == 1) return;
+        await fetchNews(nextPage);
+    }
+
     useEffect(() => {
-        // fetch news and set in article
-        fetchNews()
-        .then((result) => {
-            return result.json()
-        }).then((data) => {
-            setArticles(data.results);
-            setNextPage(data.nextPage);
-        });
-
-
+        fetchNews();
     }, [])
 
 
@@ -274,6 +263,7 @@ export default function News(props) {
             <div className="container">
                 <div className="row">
                 <div className="col-12">
+                
                     <button className="btn btn-primary" onClick={moveToNextPage}>Next</button>
                 </div>
                 </div>
